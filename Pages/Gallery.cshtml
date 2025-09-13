@@ -1,0 +1,37 @@
+﻿@page
+@model Lesson2.Pages.GalleryModel
+@{
+}
+
+<h2 class="text-3xl font-bold mb-6">Галерея</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    @foreach (var card in Model.Cards)
+    {
+        <div class="bg-white rounded shadow-lg overflow-hidden flex flex-col transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+            <img src="@card.ImageUrl" alt="@card.Title" class="w-full h-100 object-cover">
+            <div class="p-4 flex flex-col flex-grow">
+                <h2 class="text-xl font-bold mb-2">@card.Title</h2>
+                <p class="text-gray-600 flex-grow mb-4">@card.Description</p>
+
+                <a asp-page="/Gallery" asp-route-SelectedId="@card.Id"
+                   class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300 w-full text-center">
+                    Детальніше
+                </a>
+
+                @if (Model.SelectedId == card.Id)
+                {
+                    <div class="mt-4 p-2 bg-gray-100 rounded text-gray-800">
+                        <p>@card.FullDescription</p>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<div class="mt-8">
+    <a asp-page="/Index" class="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-700 transition duration-300">
+        ⬅ Назад на главную
+    </a>
+</div>
